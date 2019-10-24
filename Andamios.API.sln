@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29409.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andamios.API", "Andamios.API\Andamios.API.csproj", "{1EEA1574-A527-4B87-BCE1-903DA3759D82}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andamios.Core", "Andamios.Core\Andamios.Core.csproj", "{9EA273A7-59EA-4098-8E7F-17D0AF8CC27A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1EEA1574-A527-4B87-BCE1-903DA3759D82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EEA1574-A527-4B87-BCE1-903DA3759D82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EEA1574-A527-4B87-BCE1-903DA3759D82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EEA1574-A527-4B87-BCE1-903DA3759D82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EA273A7-59EA-4098-8E7F-17D0AF8CC27A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EA273A7-59EA-4098-8E7F-17D0AF8CC27A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EA273A7-59EA-4098-8E7F-17D0AF8CC27A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EA273A7-59EA-4098-8E7F-17D0AF8CC27A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CA496160-66BE-4CE6-9490-458D22EC6381}
+	EndGlobalSection
+EndGlobal
