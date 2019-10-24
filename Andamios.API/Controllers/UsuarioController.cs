@@ -263,7 +263,7 @@ namespace Andamios.API.Controllers
 
                 if(result.Succeeded)
                 {
-                    return Ok(user);        
+                    return Ok(user);
                 }
                 
                 return BadRequest();
