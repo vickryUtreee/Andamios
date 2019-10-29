@@ -47,8 +47,8 @@ namespace Andamios.API.Controllers
             _tokenService = tokenService;
         }
 
-        [HttpGet]
         [Route("ListaUsuarios")]
+        [HttpGet]
         public async Task<ActionResult<Usuario>> Get()
         {
             var usuarios =
@@ -99,6 +99,8 @@ namespace Andamios.API.Controllers
             {
                 
                 var result = await _userManger.CreateAsync(user, model.Password);
+
+                await _userManger.AddToRoleAsync(user, model.Role);
 
                 if(result.Succeeded){
 
@@ -153,11 +155,17 @@ namespace Andamios.API.Controllers
 
             if (user != null && await _userManger.CheckPasswordAsync(user, model.Password))
             {
+
+                var role = await _userManger.GetRolesAsync(user);
+                IdentityOptions _options = new IdentityOptions();
+
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secrete));
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(new Claim[] {
-                        new Claim ("UserID", user.Id)
+                        new Claim ("UserID", user.Id),
+                        new Claim ("Nombre", user.Nombre + " " + user.Apellido),
+                        //new Claim ("Role")
                     }),
                     Expires = DateTime.UtcNow.AddMinutes(5),
                     SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
@@ -212,7 +220,8 @@ namespace Andamios.API.Controllers
             return principal;
         }
 
-        [HttpPost]
+        [HttpPost(Name = "refresh")]
+        
         public async Task<IActionResult> Refresh(string token, string refreshToken)
         {
             var principal = GetPrincipalFromExpiredToken(token);
@@ -234,11 +243,11 @@ namespace Andamios.API.Controllers
         }
 
         [HttpPost, Authorize]
-        public async Task<IActionResult> Revoke()
+        public async Task<IActionResult> Revoke(string userName)
         {
-            var username = User.Identity.Name;
 
-            var user = _context.Usuarios.FirstOrDefault(x => x.UserName == username); //retrieve the refresh token from a data store
+
+            var user = _context.Usuarios.FirstOrDefault(x => x.UserName == userName); //retrieve the refresh token from a data store
 
             if (user == null) return BadRequest();
 

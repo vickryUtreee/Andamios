@@ -39,6 +39,7 @@ namespace Andamios.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             // Injection AppSettings.json
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
 
@@ -51,8 +52,10 @@ namespace Andamios.API
             services.AddSwaggerGen(Configuration => {
                 Configuration.SwaggerDoc("v1", new Info()
                 {
-                    Title = "Andamios API"
+                    Title = "AndamiosAPI"
                 });
+
+                Configuration.ResolveConflictingActions(api => api.First());
             });
             // END SEAGGER
 
@@ -87,7 +90,8 @@ namespace Andamios.API
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
+                    ValidateIssuer = true,
+                    ValidIssuer = "http://localhost:53870",
                     ValidateAudience = false,
                     ClockSkew = TimeSpan.Zero
                 };
@@ -167,6 +171,7 @@ namespace Andamios.API
             //Swager Useability
             app.UseSwagger();
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Andamios API"); });
+            
 
             // CORS Useability
             app.UseCors(option => {
@@ -175,6 +180,7 @@ namespace Andamios.API
 
             //aunthentiction
             app.UseAuthentication();
+
             
             app.UseMvc();
         }
